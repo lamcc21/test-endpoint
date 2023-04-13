@@ -22,12 +22,21 @@ const query = `
   }
 `;
 
+let numSuccess = 0;
+let numFail = 0;
+
 const promises = Array(10).fill().map(() =>
   axios.post(endpoint, { query })
-    .then((response) => console.log(response.data))
-    .catch((error) => console.error(error))
+    .then((response) => {
+      console.log(response.data);
+      numSuccess++;
+    })
+    .catch((error) => {
+      console.error(error);
+      numFail++;
+    })
 );
 
 Promise.all(promises)
-  .then(() => console.log('completed'))
-
+  .then(() => console.log(`All requests completed. ${numSuccess} succeeded, ${numFail} failed.`))
+  .catch((error) => console.error(`Error sending requests: ${error}`));
