@@ -29,6 +29,5 @@ const promises = Array(10).fill().map(() =>
 );
 
 Promise.all(promises)
-  .then(() => console.log('All requests completed successfully'))
-  .catch((error) => console.error(`Error sending requests: ${error}`));
+  .then(() => console.log('completed'))
 
